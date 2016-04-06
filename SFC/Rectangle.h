@@ -20,7 +20,7 @@ Rectangle<T>::Rectangle(int n, Point<T> minPoint, Point<T> maxPoint)
 {
 	this->dimension = n;
 	this->minPoint.setDimension(n);
-	this->minPoint.setCoordinateValues(minPoint.returnCoordinateValues());
+	this->minPoint.setCoordinates(minPoint.returnCoordinates());
 	this->maxPoint.setDimension(n);
-	this->maxPoint.setCoordinateValues(maxPoint.returnCoordinateValues());
+	this->maxPoint.setCoordinates(maxPoint.returnCoordinates());
 }

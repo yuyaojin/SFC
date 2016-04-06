@@ -39,8 +39,8 @@ Point<T>::Point(int dimension, T *coordinates)
 template <class T>
 Point<T>::Point(Point<T> &point)
 {
-	this->dimension = point.returndimensionnumber();
-	T *temp_coordinates = point.returncoordinates();
+	this->dimension = point.returnDimensionNumber();
+	T *temp_coordinates = point.returnCoordinates();
 	for (int i = 0; i < this->dimension;i++)
 	{
 		*(this->coordinates + i) = *(temp_coordinates + i);

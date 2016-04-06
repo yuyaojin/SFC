@@ -7,15 +7,15 @@ class Point
 {
 private:
 	int dimension;
-	vector<T> coordinateValues;
+	T *coordinates = new T[1];
 public:
 	Point<T>();
-	Point<T>(int dimension, vector<T> coordinateValues);
+	Point<T>(int dimension, T *coordinates);
 	Point<T>(Point<T> &point);
-	vector<T> returnCoordinateValues();
+	T* returnCoordinates();
 	T returnValue(int i);
 	int returnDimensionNumber();
-	void setCoordinateValues(vector<T> coordinateValues);
+	void setCoordinates(T *coordinates);
 	void setDimension(int dimension);
 
 };
@@ -27,26 +27,31 @@ Point<T>::Point()
 }
 
 template <class T>
-Point<T>::Point(int dimension, vector<T> coordinateValues)
+Point<T>::Point(int dimension, T *coordinates)
 {
 	this->dimension = dimension;
-	this->coordinateValues.assign(coordinateValues.begin(), coordinateValues.end());
+	for (int i = 0; i < dimension; i++)
+	{
+		*(this->coordinates+i)= coordinates[i];
+	}
 }
 
 template <class T>
 Point<T>::Point(Point<T> &point)
 {
-	this->dimension = point.returnDimensionNumber();
-	vector<T> vector_temp(point.returnCoordinateValues());
-	this->coordinateValues.assign(vector_temp.begin(), vector_temp.end());
-
+	this->dimension = point.returndimensionnumber();
+	T *temp_coordinates = point.returncoordinates();
+	for (int i = 0; i < this->dimension;i++)
+	{
+		*(this->coordinates + i) = *(temp_coordinates + i);
+	}
 }
 
 
 template <class T>
 T Point<T>::returnValue(int i)
 {
-	return this->coordinateValues.at(i);
+	return *(this->coordinates+i);
 }
 
 template <class T>
@@ -56,12 +61,10 @@ int Point<T>::returnDimensionNumber()
 }
 
 template <class T>
-vector<T> Point<T>::returnCoordinateValues()
+T* Point<T>::returnCoordinates()
 {
-	return this->coordinateValues;
+	return this->coordinates;
 }
-
-
 
 template <class T>
 void Point<T>::setDimension(int dimension)
@@ -70,7 +73,10 @@ void Point<T>::setDimension(int dimension)
 }
 
 template <class T>
-void Point<T>::setCoordinateValues(vector<T> coordinateValues)
+void Point<T>::setCoordinates(T *coordinates)
 {
-	this->coordinateValues.assign(coordinateValues.begin(), coordinateValues.end());
+	for (int i = 0; i < dimension; i++)
+	{
+		*(this->coordinates + i) = coordinates[i];
+	}
 }

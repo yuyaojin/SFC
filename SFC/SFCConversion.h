@@ -8,8 +8,8 @@ public:
 public:
 	SFCConversion();
 	~SFCConversion();
-	int* decimal2Binary(T value);
-	int* encodeMorton(Point<T> point£¬int level);
+	int* decimal2Binary(T value, int level);
+	int* encodeMorton(Point<T> point,int level);
 	//T2 encodeMorton(Point<T1> point£¬int m)
 };
 
@@ -41,7 +41,7 @@ int* SFCConversion<T>::decimal2Binary(T value,int level)
 }
 
 template<class T>
-int* SFCConversion<T>::encodeMorton(Point<T> point£¬int level)
+int* SFCConversion<T>::encodeMorton(Point<T> point,int level)
 {
 	int dimension = point.returnDimension();
 	//int coordinates[dimension] = { 0 };

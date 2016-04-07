@@ -2,11 +2,4 @@
 #include "SFCConversion.h"
 
 
-SFCConversion::SFCConversion()
-{
-}
 
-
-SFCConversion::~SFCConversion()
-{
-}

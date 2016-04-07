@@ -5,13 +5,19 @@ class SFCConversion
 {
 public:
 	Point<T> point;
+	int n;
 public:
-	SFCConversion();
-	~SFCConversion();
+	SFCConversion(int n);
 	int* decimal2Binary(T value, int level);
 	int* encodeMorton(Point<T> point,int level);
-	//T2 encodeMorton(Point<T1> point£¬int m)
+
 };
+
+template<class T>
+SFCConversion<T>::SFCConversion(int n)
+{
+	this->n = n;
+}
 
 template<class T>
 int* SFCConversion<T>::decimal2Binary(T value,int level)
@@ -22,21 +28,23 @@ int* SFCConversion<T>::decimal2Binary(T value,int level)
 	int length = 0;
 	while (decimalValue > 0)
 	{
-		*(reverseBinaryArray + i) = decimalValue % 2;
+		*(reverseBinaryArray + length) = decimalValue % 2;
 		decimalValue = decimalValue / 2;
 		length++;
 	}
+	//printf("%s\n","reverse");
 	int null_num = level - length;
 	//int temp_length = length;
-	for (int i = 0; i < null_num; i++)
+	for (int i = 0; i <= null_num; i++)
 	{
-		*(reverseBinaryArray + length+i)=0;
+		*(reverseBinaryArray + length+i)=int(0);
 	}
 	for (int i = 0; i < level; i++)
 	{
-		*(binaryArray + i) = *(reverseBinaryArray + level - i);
+		*(binaryArray + i) = *(reverseBinaryArray + level - i-1);
 	}
-	delete []reverseBinaryArray;
+	printf("\n");
+
 	return binaryArray;
 }
 
@@ -46,20 +54,26 @@ int* SFCConversion<T>::encodeMorton(Point<T> point,int level)
 	int dimension = point.returnDimension();
 	//int coordinates[dimension] = { 0 };
 	T* temp_coordinates= point.returnCoordinates();
-	T* temp_pointer[dimension];
+	T** temp_pointer = new T*[dimension];
+	for (int i = 0; i <dimension ; i++)
+	{
+		temp_pointer[i] = new T[level];
+	}
 	int totalLength = dimension*level;
 	T* binaryArray = new int[totalLength];
 	for (int i = 0; i < dimension; i++)
 	{
-		temp_pointer[i] = this->decimal2Binary(*(temp_coordinates + i));
+		temp_pointer[i] = this->decimal2Binary(*(temp_coordinates + i),level);
 	}
 	for (int i = 0; i < level; i++)
 	{
 		for (int j = 0; j < dimension; j++)
 		{
 			*(binaryArray +i*j +j) = *(temp_pointer[j] + i);
+			printf("%d", *(binaryArray + i*j + j));
 		}
 	}
-	delete[]temp_coordinates;
+	//delete[]temp_coordinates;
+	
 	return binaryArray;
 }

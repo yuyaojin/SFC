@@ -7,14 +7,14 @@ class Point
 {
 private:
 	int dimension;
-	T *coordinates = new T[1];
+	T *coordinates = new T[1];;
 public:
 	Point<T>();
 	Point<T>(int dimension, T *coordinates);
 	Point<T>(Point<T> &point);
 	T* returnCoordinates();
 	T returnValue(int i);
-	int returnDimensionNumber();
+	int returnDimension();
 	void setCoordinates(T *coordinates);
 	void setDimension(int dimension);
 
@@ -30,6 +30,7 @@ template <class T>
 Point<T>::Point(int dimension, T *coordinates)
 {
 	this->dimension = dimension;
+	//this->coordinates = new T[1];
 	for (int i = 0; i < dimension; i++)
 	{
 		*(this->coordinates+i)= coordinates[i];
@@ -39,7 +40,7 @@ Point<T>::Point(int dimension, T *coordinates)
 template <class T>
 Point<T>::Point(Point<T> &point)
 {
-	this->dimension = point.returnDimensionNumber();
+	this->dimension = point.returnDimension();
 	T *temp_coordinates = point.returnCoordinates();
 	for (int i = 0; i < this->dimension;i++)
 	{
@@ -55,7 +56,7 @@ T Point<T>::returnValue(int i)
 }
 
 template <class T>
-int Point<T>::returnDimensionNumber()
+int Point<T>::returnDimension()
 {
 	return this->dimension;
 }
